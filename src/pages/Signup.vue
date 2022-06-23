@@ -99,6 +99,8 @@
 </template>
 <script>
 import SignupValidations from "../services/SignupValidations";
+import { SIGNUP_ACTION } from "../store/storeConstants";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -113,6 +115,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions("auth", {
+      signup: SIGNUP_ACTION,
+    }),
     onSignup() {
       //check the validations
       let validations = new SignupValidations(
@@ -125,9 +130,23 @@ export default {
         this.confirm_password
       );
       this.errors = validations.checkValidations();
-      if (this.errors.length) {
+      if (
+        "name" in this.errors ||
+        "email" in this.errors ||
+        "phoneNumber" in this.errors ||
+        "gender" in this.errors ||
+        "password" in this.errors
+      ) {
         return false;
       }
+      //signup registration
+      this.signup({
+        name: this.name,
+        email: this.email,
+        phoneNumber: this.phoneNumber,
+        gender: this.gender,
+        password: this.password,
+      });
     },
   },
 };

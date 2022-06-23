@@ -13,7 +13,7 @@ module.exports = {
       }
     );
   },
-  getUsers: (callBack) => {
+  getUser: (callBack) => {
     pool.query(
       `select id,name,email,phoneNumber,gender,password from user_registration`,
       [],
@@ -27,7 +27,7 @@ module.exports = {
   },
   getUserByUsedId: (id, callBack) => {
     pool.query(
-      `select id,name,email,phoneNumber,gender,password from user_registration where id=?`,
+      `select id,name,email,phoneNumber,gender,password from user_registration where id = ?`,
       [id],
       (error, results, fields) => {
         if (error) {
@@ -39,7 +39,7 @@ module.exports = {
   },
   getUserByUserEmail: (email, callBack) => {
     pool.query(
-      `select * from registration where email = ?`,
+      `select * from user_registration where email = ?`,
       [email],
       (error, results, fields) => {
         if (error) {
@@ -51,14 +51,13 @@ module.exports = {
   },
   updateUser: (data, callBack) => {
     pool.query(
-      `update user_registration set name=?, email=?,phoneNumber=?, gender=?,  password=?,  where id = ?`,
+      `update user_registration set name=?, email=?,phoneNumber=?, gender=?,  password=?  where id = ?`,
       [
-        data.first_name,
-        data.last_name,
-        data.gender,
+        data.name,
         data.email,
+        data.phoneNumber,
+        data.gender,
         data.password,
-        data.number,
         data.id,
       ],
       (error, results, fields) => {
@@ -71,7 +70,7 @@ module.exports = {
   },
   deleteUser: (data, callBack) => {
     pool.query(
-      `delete from registration where id = ?`,
+      `delete from user_registration where id = ?`,
       [data.id],
       (error, results, fields) => {
         if (error) {

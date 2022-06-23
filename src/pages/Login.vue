@@ -38,6 +38,8 @@
 </template>
 <script>
 import LoginValidations from "../services/LoginValidations";
+import { LOGIN_ACTION } from "../store/storeConstants";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -47,13 +49,20 @@ export default {
     };
   },
   methods: {
+    ...mapActions("auth", {
+      login: LOGIN_ACTION,
+    }),
     onLogin() {
       //check the validations
       let validations = new LoginValidations(this.email, this.password);
       this.errors = validations.checkValidations();
-      if (this.errors.length) {
+      if ("email" in this.errors || "password" in this.errors) {
         return false;
       }
+      this.login({
+        email: this.email,
+        password: this.password,
+      });
     },
   },
   // computed: {

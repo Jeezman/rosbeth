@@ -1,10 +1,10 @@
 const {
   create,
-  getUserByUsedId,
+  getUserByUserId,
   getUserByUserEmail,
   updateUser,
   deleteUser,
-  getUsers,
+  getUser,
 } = require("./user.service");
 const { genSaltSync, hashSync, compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
@@ -22,6 +22,7 @@ module.exports = {
           message: "Database connection error",
         });
       }
+
       return res.status(200).json({
         success: 1,
         data: results,
@@ -43,12 +44,13 @@ module.exports = {
       const result = compareSync(body.password, results.password);
       if (result) {
         results.password = undefined;
-        const jsontoken = sign({ result: results }, "qwe1234", {
+        const jsontoken = sign({ result: results }, process.env.JWT_KEY, {
           expiresIn: "1h",
         });
         return res.json({
           success: 1,
           message: "login successfully",
+          data: results,
           token: jsontoken,
         });
       } else {
@@ -59,9 +61,9 @@ module.exports = {
       }
     });
   },
-  getUserByUserId: (req, res) => {
+  getUsersByUserId: (req, res) => {
     const id = req.params.id;
-    getUserByUsedId(id, (err, results) => {
+    getUserByUserId(id, (err, results) => {
       if (err) {
         console.log(err);
         return;
@@ -80,7 +82,7 @@ module.exports = {
     });
   },
   getUsers: (req, res) => {
-    getUsers((err, results) => {
+    getUser((err, results) => {
       if (err) {
         console.log(err);
         return;
@@ -98,7 +100,13 @@ module.exports = {
     updateUser(body, (err, results) => {
       if (err) {
         console.log(err);
-        return;
+        return false;
+      }
+      if (!results) {
+        return res.json({
+          success: 0,
+          message: "Failed to update user",
+        });
       }
       return res.json({
         success: 1,
@@ -106,7 +114,7 @@ module.exports = {
       });
     });
   },
-  deleteUser: (req, res) => {
+  deleteUsers: (req, res) => {
     const data = req.body;
     deleteUser(data, (err, results) => {
       if (err) {

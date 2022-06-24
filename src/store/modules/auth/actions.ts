@@ -11,28 +11,56 @@ export default {
       password: payload.password,
     };
 
-    const response = await Axios.post(
-      `http://localhost:8080/api/users/signup`,
-      postData
+    try {
+      const response = await Axios.post(
+        `http://localhost:8080/api/users/signup`,
+        postData
 
-      //   {headers: {
+        //   {headers: {
 
-      //     Authorization: 'Bearer ' + token,
-      //  }}
-    );
-    console.log(response);
+        //     Authorization: 'Bearer ' + token,
+        //  }}
+      );
+      console.log(response);
+    } catch (err: any) {
+      if (err && err.response && err.response.data) {
+        let errorMessage = err.response.data.message;
+        //console.log(errorMessage);
+        throw errorMessage;
+      }
+      // if (response && response.data) {
+      //   let successMessage = response.data.message;
+      //   throw successMessage;
+      // }
+    }
   },
   async [LOGIN_ACTION](_: any, payload: any) {
     let postData = {
       email: payload.email,
-
       password: payload.password,
     };
-
-    const response = await Axios.post(
-      `http://localhost:8080/api/users/login`,
-      postData
-    );
-    console.log(response);
+    let response = "";
+    try {
+      response = await Axios.post(
+        `http://localhost:8080/api/users/login`,
+        postData
+      );
+      if (response && response.data) {
+        let successMessage = response.data.message;
+        console.log(response.data.message);
+        throw successMessage;
+      }
+    } catch (error: any) {
+      if (error && error.response && error.response.data) {
+        let errorLoginMessage = error.response.data.message;
+        //console.log(errorLoginMessage);
+        throw errorLoginMessage;
+      }
+      // if (response) {
+      //   let successMessage = response;
+      //   console.log(response);
+      //   throw successMessage;
+      // }
+    }
   },
 };

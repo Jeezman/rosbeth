@@ -22,5 +22,5 @@ router.get("/", checkToken, getUsers);
 router.get("/:id", checkToken, getUsersByUserId);
 router.post("/login", login);
 router.patch("/", checkToken, updateUsers);
-router.delete("/", checkToken, deleteUsers);
+router.delete("/delete", deleteUsers);
 module.exports = router;

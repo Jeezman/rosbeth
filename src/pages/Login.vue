@@ -8,6 +8,8 @@
           <h3>Login {{ firstName }}</h3>
           <hr />
         </div>
+        <div class="alert alert-danger" v-if="error">{{ error }}</div>
+        <div class="alert alert-success" v-if="success">{{ success }}</div>
         <form action="" @submit.prevent="onLogin()">
           <div class="form-group">
             <label for="">Email:</label>
@@ -46,6 +48,8 @@ export default {
       email: "",
       password: "",
       errors: [],
+      error: "",
+      success: "",
     };
   },
   methods: {
@@ -62,14 +66,12 @@ export default {
       this.login({
         email: this.email,
         password: this.password,
+      }).catch((error) => {
+        //console.log("what happening");
+        this.error = error;
       });
     },
   },
-  // computed: {
-  //   ...mapState("auth", {
-  //     firstName: (state) => state.name,
-  //   }),
-  // },
 };
 </script>
 

@@ -11,7 +11,13 @@ const { sign } = require("jsonwebtoken");
 
 module.exports = {
   createUser: (req, res) => {
-    const body = req.body;
+    const body = {
+      name: req.body.name,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
+      gender: req.body.gender,
+      password: req.body.password,
+    };
     const salt = genSaltSync(10);
     body.password = hashSync(body.password, salt);
     create(body, (err, results) => {
@@ -22,11 +28,34 @@ module.exports = {
           message: "Database connection error",
         });
       }
-
-      return res.status(200).json({
-        success: 1,
-        data: results,
-      });
+      // if (body.name.length > 0) {
+      //   //console.log(err);
+      //   return res.status(500).json({
+      //     success: 0,
+      //     message: "Name already exists",
+      //   });
+      // }
+      // if (body.password.length > 0) {
+      //   //console.log(err);
+      //   return res.status(500).json({
+      //     success: 0,
+      //     message: "Password already exists",
+      //   });
+      // }
+      // if (body.phoneNumber.length > 0) {
+      //   //console.log(err);
+      //   return res.status(500).json({
+      //     success: 0,
+      //     message: "Phonenumber already exists",
+      //   });
+      // }
+      else {
+        return res.status(200).json({
+          success: 1,
+          message: "signup successfully",
+          data: body,
+        });
+      }
     });
   },
   login: (req, res) => {
@@ -36,9 +65,9 @@ module.exports = {
         console.log(err);
       }
       if (!results) {
-        return res.json({
+        return res.status(500).json({
           success: 0,
-          data: "Invalid email or password",
+          message: "Invalid email or password",
         });
       }
       const result = compareSync(body.password, results.password);
@@ -47,16 +76,16 @@ module.exports = {
         const jsontoken = sign({ result: results }, process.env.JWT_KEY, {
           expiresIn: "1h",
         });
-        return res.json({
+        return res.status(200).json({
           success: 1,
           message: "login successfully",
           data: results,
           token: jsontoken,
         });
       } else {
-        return res.json({
+        return res.status(500).json({
           success: 0,
-          data: "Invalid email or password",
+          message: "Invalid email or password",
         });
       }
     });
@@ -120,9 +149,8 @@ module.exports = {
       if (err) {
         console.log(err);
         return;
-      }
-      if (!results) {
-        return res.json({
+      } else if (!results) {
+        return res.status(500).json({
           success: 0,
           message: "Record Not Found",
         });

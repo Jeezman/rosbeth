@@ -105,4 +105,10 @@ export default class SignupValidations {
     }
     return errors;
   }
+
+  // static getErrorMessageFromCode(errorCode) {
+  //   if (errors) {
+  //     return "Email already exists";
+  //   }
+  // }
 }

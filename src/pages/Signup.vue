@@ -8,6 +8,13 @@
           <h3>Signup</h3>
           <hr />
         </div>
+        <!-- {!er
+        <div class="alert alert-success" v-if="success">{{ success }}</div>
+        } {!success &&
+        <div class="alert alert-danger" v-if="error">{{ error }}</div>
+        } -->
+        <div class="alert alert-danger" v-if="error">{{ error }}</div>
+        <div class="alert alert-success" v-else-if="success">{{ success }}</div>
         <form action="" @submit.prevent="onSignup()">
           <div class="form-group">
             <label for="">Name:</label>
@@ -112,6 +119,8 @@ export default {
       confirm_password: "",
       //selected: "Please select a gender",
       errors: [],
+      error: "",
+      success: "",
     };
   },
   methods: {
@@ -146,6 +155,9 @@ export default {
         phoneNumber: this.phoneNumber,
         gender: this.gender,
         password: this.password,
+      }).catch((error, success) => {
+        this.error = error;
+        this.success = success;
       });
     },
   },

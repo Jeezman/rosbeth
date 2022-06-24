@@ -8,6 +8,13 @@
           <h3>Signup</h3>
           <hr />
         </div>
+        <!-- {!er
+        <div class="alert alert-success" v-if="success">{{ success }}</div>
+        } {!success &&
+        <div class="alert alert-danger" v-if="error">{{ error }}</div>
+        } -->
+        <div class="alert alert-danger" v-if="error">{{ error }}</div>
+        <div class="alert alert-success" v-else-if="success">{{ success }}</div>
         <form action="" @submit.prevent="onSignup()">
           <div class="form-group">
             <label for="">Name:</label>
@@ -99,6 +106,8 @@
 </template>
 <script>
 import SignupValidations from "../services/SignupValidations";
+import { SIGNUP_ACTION } from "../store/storeConstants";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -110,9 +119,14 @@ export default {
       confirm_password: "",
       //selected: "Please select a gender",
       errors: [],
+      error: "",
+      success: "",
     };
   },
   methods: {
+    ...mapActions("auth", {
+      signup: SIGNUP_ACTION,
+    }),
     onSignup() {
       //check the validations
       let validations = new SignupValidations(
@@ -125,9 +139,26 @@ export default {
         this.confirm_password
       );
       this.errors = validations.checkValidations();
-      if (this.errors.length) {
+      if (
+        "name" in this.errors ||
+        "email" in this.errors ||
+        "phoneNumber" in this.errors ||
+        "gender" in this.errors ||
+        "password" in this.errors
+      ) {
         return false;
       }
+      //signup registration
+      this.signup({
+        name: this.name,
+        email: this.email,
+        phoneNumber: this.phoneNumber,
+        gender: this.gender,
+        password: this.password,
+      }).catch((error, success) => {
+        this.error = error;
+        this.success = success;
+      });
     },
   },
 };

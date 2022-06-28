@@ -2,7 +2,8 @@ require("dotenv").config();
 import express from "express";
 const app = express();
 const userRouter = require("./api/users/user.router");
-
+const bodyParser = require("express").json;
+app.use(bodyParser());
 // const knex = require("./database/db.js");
 
 //initialize knex

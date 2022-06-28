@@ -77,9 +77,9 @@ export default class SignupValidations {
       errors["name"] = "Invalid Name!";
     }
     //phonenumber Validations
-    if (!Validations.checkPhoneNumber(this.phoneNumber)) {
-      errors["phoneNumber"] = "Invalid Phonenumber";
-    }
+    // if (!Validations.checkPhoneNumber(this.phoneNumber)) {
+    //   errors["phoneNumber"] = "Invalid Phonenumber";
+    // }
     //gender Validations
     if (!Validations.checkGender(this.gender)) {
       errors["gender"] = "Gender is required";
@@ -105,4 +105,10 @@ export default class SignupValidations {
     }
     return errors;
   }
+
+  // static getErrorMessageFromCode(errorCode) {
+  //   if (errors) {
+  //     return "Email already exists";
+  //   }
+  // }
 }

@@ -1,9 +1,3 @@
-// const knex = require("knex");
-// const knexfile = require("./knexfile");
-
-// const db = knex(knexfile.development);
-// module.exports = db;
-
 const { createPool } = require("mysql");
 
 const pool = createPool({
@@ -13,5 +7,9 @@ const pool = createPool({
   password: process.env.DB_PASS,
   database: process.env.MYSQL_DB,
   connectionLimit: 10,
+});
+pool.getConnection((err, connection) => {
+  if (err) throw err;
+  console.log("DB connected successful");
 });
 module.exports = pool;

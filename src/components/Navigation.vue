@@ -86,6 +86,97 @@
           </ul>
         </div>
 
+        <div class="mobile-header d-flex">
+          <a class="navbar-brand" href="#">Rosbeth</a>
+          <button
+            class="btn btn-outline-light"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample"
+          >
+            <!-- <span class="navbar-toggler-icon"></span> -->
+            <i class="bi bi-list"></i>
+          </button>
+
+          <div
+            class="offcanvas offcanvas-start mobile-bg"
+            tabindex="-1"
+            id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                Offcanvas
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              >
+                <i class="bi bi-x-lg white-bg"></i>
+              </button>
+            </div>
+            <div class="offcanvas-body">
+              <div class="nav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <router-link class="nav-link" to="/"
+                      >Home Learning</router-link
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <router-link class="nav-link" to="/login"
+                      >About Us</router-link
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <router-link class="nav-link" to="/signup"
+                      >Classes</router-link
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <router-link class="nav-link" to="/"
+                      >News & Events</router-link
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <router-link class="nav-link" to="/">6th Form</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link class="nav-link" to="/"
+                      >Contact Us</router-link
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="nav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <router-link class="nav-link" to="/">Home Learning</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/login">About Us</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/signup">Classes</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/">News & Events</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/">6th Form</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link class="nav-link" to="/">Contact Us</router-link>
+              </li>
+            </ul>
+          </div> -->
+        </div>
         <div class="header d-flex">
           <a class="navbar-brand" href="#">Rosbeth</a>
 
@@ -186,6 +277,9 @@ export default {};
   height: 80px;
   align-items: center;
 }
+.mobile-header {
+  display: none !important;
+}
 .header a {
   text-decoration: none;
   color: #fff;
@@ -204,5 +298,42 @@ export default {};
   margin-right: 20px;
   align-items: center;
   display: flex;
+}
+
+@media screen and (max-width: 480px) {
+  .sub-header {
+    display: none;
+  }
+  .mobile-header {
+    background: #070954;
+    color: #fff;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-style: normal;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    justify-content: space-between;
+    height: 80px;
+    align-items: center;
+    display: flex !important;
+  }
+  .mobile-header a {
+    text-decoration: none;
+    color: #fff;
+  }
+  .modal-backdrop.show {
+    opacity: 0;
+  }
+  .white-bg {
+    color: #fff !important;
+  }
+  .mobile-bg {
+    background: #070954 !important;
+  }
+  .header {
+    display: none !important;
+  }
 }
 </style>

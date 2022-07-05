@@ -191,4 +191,26 @@ export default {};
   background-position: center center;
   background-repeat: no-repeat;
 }
+
+@media screen and (max-width: 480px) {
+  .slides {
+    margin: 1%;
+    max-width: 75%;
+  }
+  .carousel-image1 {
+    padding: 20px;
+  }
+  .carousel-image2 {
+    padding: 20px;
+  }
+  .carousel-image3 {
+    padding: 20px;
+  }
+  .carousel-image4 {
+    padding: 20px;
+  }
+  .carousel-image5 {
+    padding: 20px;
+  }
+}
 </style>

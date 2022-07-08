@@ -1,20 +1,20 @@
 <script>
-import Carousel from "../components/Carousel.vue";
 import Navigation from "../components/Navigation.vue";
 import Footer from "../components/Footer.vue";
+import ContactContent from "../components/ContactContent.vue";
 export default {
-  name: "Home",
+  name: "Contact",
   components: {
     Navigation,
-    Carousel,
     Footer,
+    ContactContent,
   },
 };
 </script>
 
 <template>
   <Navigation />
-  <Carousel />
+  <ContactContent />
   <Footer />
 </template>
 

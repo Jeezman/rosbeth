@@ -1,20 +1,20 @@
 <script>
-import Carousel from "../components/Carousel.vue";
 import Navigation from "../components/Navigation.vue";
 import Footer from "../components/Footer.vue";
+import PolicyContent from "../components/PolicyContent.vue";
 export default {
-  name: "Home",
+  name: "PrivacyPolicy",
   components: {
     Navigation,
-    Carousel,
     Footer,
+    PolicyContent,
   },
 };
 </script>
 
 <template>
   <Navigation />
-  <Carousel />
+  <PolicyContent />
   <Footer />
 </template>
 

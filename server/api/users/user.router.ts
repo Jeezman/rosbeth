@@ -17,10 +17,11 @@ const {
 // } from "./user.controller";
 const router = require("express").Router();
 const { checkToken } = require("../../auth/token_validation");
-router.post("/signup", createUser);
-router.get("/", checkToken, getUsers);
-router.get("/:id", checkToken, getUsersByUserId);
+const { validateRegister } = require("../../auth/validate_registration");
+router.post("/signup", validateRegister, createUser);
+// router.get("/", checkToken, getUsers);
+// router.get("/:id", checkToken, getUsersByUserId);
 router.post("/login", login);
-router.patch("/", checkToken, updateUsers);
-router.delete("/delete", deleteUsers);
+// router.patch("/", checkToken, updateUsers);
+// router.delete("/delete", deleteUsers);
 module.exports = router;

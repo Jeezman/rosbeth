@@ -49,7 +49,6 @@ export default {
       password: "",
       errors: [],
       error: "",
-      success: "",
     };
   },
   methods: {
@@ -66,7 +65,8 @@ export default {
       this.login({
         email: this.email,
         password: this.password,
-      }).catch((error) => {
+      })
+      .catch((error) => {
         //console.log("what happening");
         this.error = error;
       });

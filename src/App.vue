@@ -5,6 +5,7 @@ import Home from "./pages/Home.vue";
 import Footer from "./components/Footer.vue";
 // import HelloWorld from "@/components/HelloWorld.vue";
 import PrivacyPolicy from "./pages/PrivacyPolicy.vue";
+
 export default {
   name: "App",
   components: {},

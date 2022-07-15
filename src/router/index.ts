@@ -4,10 +4,16 @@ import Signup from "../pages/Signup.vue";
 import PrivacyPolicy from "../pages/PrivacyPolicy.vue";
 import Home from "../pages/Home.vue";
 import Contact from "../pages/Contact.vue";
+import Dashboard from "../pages/Dashboard.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: "/dashboard",
+      name: "Dashboard",
+      component: Dashboard,
+    },
     {
       path: "/login",
       name: "Login",
